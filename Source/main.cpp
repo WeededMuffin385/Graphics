@@ -7,17 +7,20 @@ import Sandcore.Graphics.Window;
 import Sandcore.Graphics.Mesh;
 import Sandcore.Graphics.Mesh.Vertex;
 
+import glm;
+
 using namespace Sandcore;
 
 int main() {
+	glm::vec3 u;
+
 	Mesh<int, float, double> x;
 
-	x.vertices.emplace_back(1, 3.25, 22);
+	x.vertices.emplace_back(1.f, 3.25f, 22.f);
 
 	auto a = x.vertices[0].get<0>();
 	auto b = x.vertices[0].get<1>();
 	auto c = x.vertices[0].get<2>();
-
 
 	std::println("Hello world | a: {} | b: {} | c: {}", a, b, c);
 

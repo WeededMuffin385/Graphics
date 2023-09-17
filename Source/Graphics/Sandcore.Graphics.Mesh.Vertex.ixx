@@ -16,7 +16,8 @@ export namespace Sandcore {
 
 		template<std::size_t N>
 		auto& get() {
-			return (GetType<N, Args...>&)(data[GetOffset<N>]);
+			using T = Get<N>::Type;
+			return (T&)(data[Get<N>::Offset]);
 		}
 
 		static void setAttributeDescriptions(GLuint VAO) {
@@ -28,45 +29,31 @@ export namespace Sandcore {
 
 		std::uint8_t data[Bytes];
 
-
-
 		template<std::size_t N, std::size_t P, typename T, typename ...Args>
-		struct GetOffsetHelper {
-			static inline constexpr std::size_t Value = GetOffsetHelper<N - 1, P + sizeof(T), Args...>::Value;
+		struct GetHelper {
+			using GetHelperNext = GetHelper<N - 1, P + sizeof(T), Args...>;
+
+			using Type = GetHelperNext::Type;
+			static inline constexpr std::size_t Offset = GetHelperNext::Offset;
 		};
 
 		template<std::size_t P, typename T, typename ...Args>
-		struct GetOffsetHelper<0, P, T, Args...> {
-			static inline constexpr std::size_t Value = P;
-		};
-
-		template<std::size_t N> 
-		static inline constexpr std::size_t GetOffset = GetOffsetHelper<N, 0, Args...>::Value;
-
-
-
-		template <std::size_t N, typename T, typename... Args>
-		struct GetTypeHelper {
-			using Type = typename GetTypeHelper<N - 1, Args...>::Type;
-		};
-
-		template <typename T, typename... Args>
-		struct GetTypeHelper<0, T, Args...> {
+		struct GetHelper<0, P, T, Args...> {
 			using Type = T;
+			static inline constexpr std::size_t Offset = P;
 		};
 
-		template <std::size_t N, typename... Args> 
-		using GetType = GetTypeHelper<N, Args...>::Type;
+		template<std::size_t N>
+		using Get = GetHelper<N, 0, Args...>;
 
 
-
-		template<std::size_t N = 0, std::size_t P = 0, typename T, typename ...Args>
+		template<std::size_t P = 0, typename T, typename ...Args>
 		void constructorHelper(T arg, Args ...args) {
-			constructorHelper<N + 0, P + 0>(arg);
-			constructorHelper<N + 1, P + sizeof(T)>(args...);
+			constructorHelper<P>(arg);
+			constructorHelper<P + sizeof(T)>(args...);
 		}
 
-		template<std::size_t N = 0, std::size_t P = 0, typename T>
+		template<std::size_t P = 0, typename T>
 		void constructorHelper(T arg) {
 			(T&)(data[P]) = arg;
 		}
