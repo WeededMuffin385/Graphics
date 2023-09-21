@@ -27,6 +27,10 @@ export namespace Sandcore {
 		void operator=(Window&& other) = delete;
 
 		void create(int width, int height, const char* title, GLFWmonitor* monitor = nullptr, GLFWwindow* share = nullptr) {
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 			window = glfwCreateWindow(width, height, title, monitor, share);
 			if (!window) throw std::exception("Unable to create window");
 			Events::setWindowCallbacks(window);
@@ -71,6 +75,10 @@ export namespace Sandcore {
 
 			glfwGetCursorPos(window, &position.x, &position.y);
 			return position;
+		}
+
+		auto getKey(int key, int state = GLFW_PRESS) {
+			return glfwGetKey(window, key) == state;
 		}
 
 		auto getIcon(Image& image) {

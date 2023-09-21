@@ -148,20 +148,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Libraries\glm\glm.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Camera.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Framebuffer.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Debug.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Mesh.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Mesh.Vertex.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.OpenGL.hpp" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Canvas.ixx" />
-    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Canvas.Window.ixx" />
-    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Drawable.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Display.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Image.ixx" />
-    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Shader.Program.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Shader.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.2D.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.3D.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Window.Events.Implementation.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Window.Events.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Window.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.System.Clock.ixx" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

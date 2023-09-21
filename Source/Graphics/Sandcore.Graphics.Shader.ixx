@@ -1,8 +1,10 @@
 module;
 #include "Sandcore.Graphics.OpenGL.hpp"
-export module Sandcore;
+export module Sandcore.Graphics.Shader;
 
 import std;
+import glm;
+
 
 export namespace Sandcore {
 	class Shader {
@@ -17,7 +19,7 @@ export namespace Sandcore {
 		}
 
 		~Shader() {
-			glDeleteShader(type);
+			glDeleteShader(shader);
 		}
 
 		void load(std::filesystem::path path) {
@@ -66,9 +68,28 @@ export namespace Sandcore {
 			program = glCreateProgram();
 		}
 
+
 		~Program() {
-			glDeleteProgram(program);
+			clear();
 		}
+
+		Program(Program&& other) {
+			program = other.program;
+			other.program = 0;
+		}
+
+		Program& operator=(Program&& other) {
+			if (this != &other) {
+				clear();
+				program = other.program;
+				other.program = 0;
+			}
+
+			return *this;
+		}
+
+		Program(const Program& other) = delete;
+		Program& operator=(const Program& other) = delete;
 
 		void load(std::filesystem::path path) {
 			std::filesystem::path vertPath;
@@ -91,19 +112,37 @@ export namespace Sandcore {
 			glAttachShader(program, fragShader.get());
 			glLinkProgram(program);
 			status();
-
 		}
 
-		template<typename T> struct SetHelper{};
-		template<> struct SetHelper<int> { static inline auto value = glUniform1i; };
-		template<> struct SetHelper<float> { static inline auto value = glUniform1f; };
+		void use() {
+			glUseProgram(program);
+		}
 
 		template<typename T> void set(std::string name, T value) {
 			glUseProgram(program);
-			auto location = glGetUniformLocation(program, name.c_str());
+			auto location = getLocation(name);
 			SetHelper<T>::value(location, value);
 		}
+
+		template<> void set<glm::vec3>(std::string name, glm::vec3 value) {
+			glUseProgram(program);
+			auto location = getLocation(name);
+			SetHelper<glm::vec3>::value(location, 1, glm::gtc::value_ptr(value));
+		}
+
+		template<> void set<glm::mat4>(std::string name, glm::mat4 value) {
+			glUseProgram(program);
+			auto location = getLocation(name);
+			SetHelper<glm::mat4>::value(location, 1, GL_FALSE, glm::value_ptr(value));
+		}
+
 	private:
+		template<typename T> struct SetHelper {};
+		template<> struct SetHelper<int> { static inline auto& value = glUniform1i; };
+		template<> struct SetHelper<float> { static inline auto& value = glUniform1f; };
+		template<> struct SetHelper<glm::vec3> { static inline auto& value = glUniform3fv; };
+		template<> struct SetHelper<glm::mat4> { static inline auto& value = glUniformMatrix4fv; };
+
 		void status() {
 			GLint success;
 			GLchar log[512];
@@ -116,6 +155,13 @@ export namespace Sandcore {
 			}
 		}
 
+		GLint getLocation(std::string name) { 
+			return glGetUniformLocation(program, name.c_str()); 
+		}
+
+		void clear() {
+			glDeleteProgram(program);
+		}
 
 		GLuint program;
 	};

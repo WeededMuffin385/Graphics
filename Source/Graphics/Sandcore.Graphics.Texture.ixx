@@ -6,8 +6,30 @@ export namespace Sandcore {
 	class Texture {
 	public:
 		virtual ~Texture() {
-			glDeleteTextures(1, &texture);
+			clear();
 		}
+
+		Texture(Texture&& other) {
+			texture = other.texture;
+			other.texture = 0;
+
+			unit = other.unit;
+		}
+
+		Texture& operator=(Texture&& other) {
+			if (this != &other) {
+				clear();
+				texture = other.texture;
+				other.texture = 0;
+
+				unit = other.unit;
+			}
+
+			return *this;
+		}
+
+		Texture(const Texture& other) = delete;
+		Texture& operator=(const Texture& other) = delete;
 
 		virtual void create() = 0;
 
@@ -31,6 +53,10 @@ export namespace Sandcore {
 		void allocate() {
 			glDeleteTextures(1, &texture);
 			glCreateTextures(Type, 1, &texture);
+		}
+
+		void clear() {
+			glDeleteTextures(1, &texture);
 		}
 
 		GLuint unit = -1;

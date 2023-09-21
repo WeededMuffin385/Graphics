@@ -4,7 +4,7 @@ export module Sandcore.Graphics.Mesh.Vertex;
 
 import std;
 
-const bool debug = true;
+import Sandcore.Graphics.Debug;
 
 export namespace Sandcore {
 	template<typename ...Args>
@@ -16,8 +16,12 @@ export namespace Sandcore {
 
 		template<std::size_t N>
 		auto& get() {
-			using T = Get<N>::Type;
-			return (T&)(data[Get<N>::Offset]);
+			using Get = Get<N>;
+			using T = Get::Type;
+
+			(T&)(data[Get::Offset]);
+
+			return reinterpret_cast<Get::Type&>(data[Get::Offset]);
 		}
 
 		static void setAttributeDescriptions(GLuint VAO) {
@@ -61,7 +65,7 @@ export namespace Sandcore {
 		template <std::size_t N = 0, std::size_t P = 0, typename T, typename ...Args>
 		static void setAttributeDescriptionHelper(GLuint VAO) {
 			if constexpr (debug) {
-				std::print("N: {} | T: {}\n", N, typeid(T).name());
+				std::print("[Vertex Debug] N: {} | T: {}\n", N, typeid(T).name());
 			} else {
 				glEnableVertexArrayAttrib(VAO, N);
 				glVertexArrayAttribFormat(VAO, N, sizeof(T) / sizeof(GLfloat), GL_FLOAT, GL_FALSE, P);

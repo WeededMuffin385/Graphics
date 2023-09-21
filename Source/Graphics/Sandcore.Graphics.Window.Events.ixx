@@ -63,6 +63,7 @@ export namespace Sandcore {
 			glfwSetMouseButtonCallback(window, mouse_button_callback);
 			glfwSetKeyCallback(window, key_callback);
 			glfwSetWindowSizeCallback(window, window_size_callback);
+			glfwSetWindowRefreshCallback(window, window_refresh_callback);
 		}
 
 		static void erase(GLFWwindow* window) {
@@ -75,6 +76,7 @@ export namespace Sandcore {
 		static void mouse_button_callback(GLFWwindow* window, int button, int action, int mode);
 		static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 		static void window_size_callback(GLFWwindow* window, int width, int height);
+		static void window_refresh_callback(GLFWwindow* window);
 
 		static inline std::unordered_map<GLFWwindow*, std::queue<Event>> events;
 	};

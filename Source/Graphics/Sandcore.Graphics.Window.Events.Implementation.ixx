@@ -68,4 +68,8 @@ export namespace Sandcore {
 
 		events[window].push(event);
 	}
+
+	void Events::window_refresh_callback(GLFWwindow* window) {
+		std::println("Refreshed");
+	}
 }

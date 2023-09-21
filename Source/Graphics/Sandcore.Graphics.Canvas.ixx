@@ -2,17 +2,24 @@ module;
 #include "Sandcore.Graphics.OpenGL.hpp"
 export module Sandcore.Graphics.Canvas;
 
-import Sandcore.Graphics.Drawable;
+import std;
+import Sandcore.Graphics.Shader;
 
 export namespace Sandcore {
+	template<typename T>
+	concept Drawable = requires(T value) {
+		value.draw();
+	};
+
 	class Canvas {
 	public:
-		Canvas() {
+		Canvas(GLuint FBO = 0) : FBO(FBO) {}
+		~Canvas() { }
 
-		}
-
-		void draw(Drawable& drawable) {
+		template<Drawable T>
+		void draw(T& drawable, Program& program) {
 			bind();
+			program.use();
 			drawable.draw();
 		}
 
@@ -22,6 +29,7 @@ export namespace Sandcore {
 		}
 
 		void setViewport(int width, int height, int left = 0, int top = 0) {
+			bind();
 			glViewport(left, top, width, height);
 		}
 
@@ -29,10 +37,10 @@ export namespace Sandcore {
 			glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 		}
 
-	private:
-		GLfloat color[4]{ 0, 0, 0, 0 };
-		GLfloat depth = 1.0;
+	protected:
 
 		GLuint FBO = 0;
+		GLfloat color[4]{ 0, 0, 0, 0 };
+		GLfloat depth = 1.0;
 	};
 }

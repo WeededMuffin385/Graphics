@@ -6,30 +6,57 @@ import std;
 import Sandcore.Graphics.Window;
 import Sandcore.Graphics.Mesh;
 import Sandcore.Graphics.Mesh.Vertex;
+import Sandcore.Graphics.Shader;
+import Sandcore.Graphics.Debug;
+import Sandcore.Graphics.Display;
+import Sandcore.Graphics.Camera;
 
 import glm;
 
 using namespace Sandcore;
 
 int main() {
-	glm::vec3 u;
+	Sandcore::Display window(1920, 1080, "Hello there");
+	debugInit();
 
-	Mesh<int, float, double> x;
+	Mesh<glm::vec3> mesh;
+	mesh.vertices = {
+		{{-0.5f, -0.5f, 0.0f}},
+		{{ 0.5f, -0.5f, 0.0f}},
+		{{ 0.0f,  0.5f, 0.0f}}
+	};
 
-	x.vertices.emplace_back(1.f, 3.25f, 22.f);
+	mesh.indices = {
+		0, 1, 2
+	};
 
-	auto a = x.vertices[0].get<0>();
-	auto b = x.vertices[0].get<1>();
-	auto c = x.vertices[0].get<2>();
+	mesh.update();
 
-	std::println("Hello world | a: {} | b: {} | c: {}", a, b, c);
+	Camera camera;
+	Sandcore::Program program;
+	program.load("C:/Users/Mi/Documents/GitHub/Graphics/Userdata/triangle");
 
-
-
-	/*
-	Sandcore::Window window(1920, 1080, "Hello there");
 	Sandcore::Event event;
+	while (window.isOpen()) {
+		while (window.pollEvent(event)) {
+		}
 
-	while (window.isOpen()) while (window.pollEvent(event));
-	*/
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		auto [width, height] = window.getSize();
+
+		camera.mouseInput(window);
+		camera.keyboardInput(window);
+
+		program.set("view", camera.getViewMatrix());
+		program.set("proj", camera.getProjMatrix(width, height));
+		program.set("model", glm::gtc::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0)));
+
+		window.setViewport(width, height);
+
+
+		window.draw(mesh, program);
+		window.display();
+	}
 }

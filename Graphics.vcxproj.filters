@@ -21,10 +21,7 @@
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Canvas.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Canvas.Window.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Drawable.ixx">
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Display.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Window.Events.Implementation.ixx">
@@ -39,7 +36,7 @@
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Image.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Shader.Program.ixx">
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Shader.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.OpenGL.hpp">
@@ -61,6 +58,18 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Libraries\glm\glm.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Debug.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Framebuffer.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Camera.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Sandcore.System.Clock.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

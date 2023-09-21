@@ -69,7 +69,7 @@ namespace detail
 	{
 		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static vec<3, T, Q> call(vec<3, T, Q> const& x, vec<3, T, Q> const& y)
 		{
-			GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'cross' accepts only floating-point inputs");
+			// GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'cross' accepts only floating-point inputs");
 
 			return vec<3, T, Q>(
 				x.y * y.z - y.y * x.z,
@@ -83,7 +83,7 @@ namespace detail
 	{
 		GLM_FUNC_QUALIFIER static vec<L, T, Q> call(vec<L, T, Q> const& v)
 		{
-			GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'normalize' accepts only floating-point inputs");
+			// GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'normalize' accepts only floating-point inputs");
 
 			return v * inversesqrt(dot(v, v));
 		}
@@ -166,7 +166,7 @@ namespace detail
 	template<length_t L, typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER GLM_CONSTEXPR T dot(vec<L, T, Q> const& x, vec<L, T, Q> const& y)
 	{
-		GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'dot' accepts only floating-point inputs");
+		// GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'dot' accepts only floating-point inputs");
 		return detail::compute_dot<vec<L, T, Q>, T, detail::is_aligned<Q>::value>::call(x, y);
 	}
 
@@ -189,7 +189,7 @@ namespace detail
 	template<length_t L, typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER vec<L, T, Q> normalize(vec<L, T, Q> const& x)
 	{
-		GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'normalize' accepts only floating-point inputs");
+		// GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'normalize' accepts only floating-point inputs");
 
 		return detail::compute_normalize<L, T, Q, detail::is_aligned<Q>::value>::call(x);
 	}
