@@ -1,6 +1,6 @@
 module;
 #include "Sandcore.Graphics.OpenGL.hpp"
-export module Sandcore.Graphics.Texture.THREED;
+export module Sandcore.Graphics.Texture.D3;
 
 import Sandcore.Graphics.Texture;
 

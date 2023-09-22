@@ -165,6 +165,7 @@
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Window.Events.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Window.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.System.Clock.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.2D.Array.ixx" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

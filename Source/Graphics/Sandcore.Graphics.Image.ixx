@@ -20,6 +20,10 @@ export namespace Sandcore {
 
 	class Image {
 	public:
+		Image() {
+
+		}
+
 		~Image() {
 			free();
 		}
@@ -55,9 +59,9 @@ export namespace Sandcore {
 		auto getWidth() const { return width; }
 		auto getHeight() const { return height; }
 	private:
-		Pixel* data;
-		int width;
-		int height;
+		Pixel* data = nullptr;
+		int width = 0;
+		int height = 0;
 		int channels = 4;
 	};
 }
