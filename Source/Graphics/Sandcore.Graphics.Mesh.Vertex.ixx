@@ -17,10 +17,6 @@ export namespace Sandcore {
 		template<std::size_t N>
 		auto& get() {
 			using Get = Get<N>;
-			using T = Get::Type;
-
-			(T&)(data[Get::Offset]);
-
 			return reinterpret_cast<Get::Type&>(data[Get::Offset]);
 		}
 
@@ -28,8 +24,8 @@ export namespace Sandcore {
 			setAttributeDescriptionHelper<0, 0, Args...>(VAO);
 		}
 	private:
-		static inline constexpr std::size_t Types = (sizeof...(Args));
-		static inline constexpr std::size_t Bytes = (sizeof(Args) + ...);
+		static constexpr std::size_t Types = (sizeof...(Args));
+		static constexpr std::size_t Bytes = (sizeof(Args) + ...);
 
 		std::uint8_t data[Bytes];
 
@@ -38,13 +34,13 @@ export namespace Sandcore {
 			using GetHelperNext = GetHelper<N - 1, P + sizeof(T), Args...>;
 
 			using Type = GetHelperNext::Type;
-			static inline constexpr std::size_t Offset = GetHelperNext::Offset;
+			static constexpr std::size_t Offset = GetHelperNext::Offset;
 		};
 
 		template<std::size_t P, typename T, typename ...Args>
 		struct GetHelper<0, P, T, Args...> {
 			using Type = T;
-			static inline constexpr std::size_t Offset = P;
+			static constexpr std::size_t Offset = P;
 		};
 
 		template<std::size_t N>
@@ -65,7 +61,7 @@ export namespace Sandcore {
 		template <std::size_t N = 0, std::size_t P = 0, typename T, typename ...Args>
 		static void setAttributeDescriptionHelper(GLuint VAO) {
 			if constexpr (debug) {
-				std::print("[Vertex Debug] N: {} | T: {}\n", N, typeid(T).name());
+				std::println("[Vertex Debug] N: {} | T: {}", N, typeid(T).name());
 			} else {
 				glEnableVertexArrayAttrib(VAO, N);
 				glVertexArrayAttribFormat(VAO, N, sizeof(T) / sizeof(GLfloat), GL_FLOAT, GL_FALSE, P);

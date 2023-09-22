@@ -49,10 +49,10 @@ export namespace Sandcore {
 			glBindTextureUnit(unit, 0);
 		}
 	protected:
-		template<GLenum Type>
+		template<GLenum T>
 		void allocate() {
 			glDeleteTextures(1, &texture);
-			glCreateTextures(Type, 1, &texture);
+			glCreateTextures(T, 1, &texture);
 		}
 
 		void clear() {
