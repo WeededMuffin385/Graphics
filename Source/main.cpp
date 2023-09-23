@@ -55,7 +55,6 @@ int main() {
 
 		window.setViewport(width, height);
 
-
 		window.draw(mesh, program);
 		window.display();
 	}

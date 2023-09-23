@@ -68,6 +68,9 @@ export namespace Sandcore {
 			program = glCreateProgram();
 		}
 
+		Program(std::filesystem::path path) : Program() {
+			load(path);
+		}
 
 		~Program() {
 			clear();

@@ -158,6 +158,7 @@
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Display.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Image.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Shader.ixx" />
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.2D.Cubemap.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.2D.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.3D.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.ixx" />

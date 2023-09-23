@@ -5,6 +5,10 @@ export module Sandcore.Graphics.Texture;
 export namespace Sandcore {
 	class Texture {
 	public:
+		Texture() {
+
+		}
+
 		virtual ~Texture() {
 			clear();
 		}

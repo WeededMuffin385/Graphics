@@ -9,7 +9,7 @@ import Sandcore.Graphics.Image;
 export namespace Sandcore {
 	class Texture2DArray : public Texture {
 	public:
-		virtual void create(int width, int height, int depth) {
+		void create(int width, int height, int depth) {
 			this->width = width;
 			this->height = height;
 			this->depth = depth;

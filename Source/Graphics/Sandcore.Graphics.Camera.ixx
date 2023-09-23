@@ -25,6 +25,18 @@ export namespace Sandcore {
 			first = true;
 		}
 
+		void setSpeed(float speed) {
+			this->speed = speed;
+		}
+
+		void setPosition(glm::vec3 position) {
+			this->position = position;
+		}
+
+		auto getPosition() {
+			return position;
+		}
+
 		void mouseInput(Window& window) {
 			if (first) {
 				auto mouse = window.getCursor();

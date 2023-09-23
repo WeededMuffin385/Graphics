@@ -24,6 +24,10 @@ export namespace Sandcore {
 
 		}
 
+		Image(int width, int height) {
+			create(width, height);
+		}
+
 		~Image() {
 			free();
 		}
@@ -33,6 +37,10 @@ export namespace Sandcore {
 
 		void operator=(const Image& image) = delete;
 		void operator=(Image&& image) = delete;
+
+		Pixel& at(int x, int y) {
+			return data[x + y * width];
+		}
 
 		void free() {
 			std::free(data);

@@ -4,6 +4,7 @@ export module Sandcore.Graphics.Canvas;
 
 import std;
 import Sandcore.Graphics.Shader;
+import Sandcore.Graphics.Texture;
 
 export namespace Sandcore {
 	template<typename T>
@@ -14,7 +15,7 @@ export namespace Sandcore {
 	class Canvas {
 	public:
 		Canvas(GLuint FBO = 0) : FBO(FBO) {}
-		~Canvas() { }
+		~Canvas() {}
 
 		template<Drawable T>
 		void draw(T& drawable, Program& program) {
@@ -23,8 +24,17 @@ export namespace Sandcore {
 			drawable.draw();
 		}
 
-		void clear() {
-			glClearNamedFramebufferfv(FBO, GL_COLOR, 0, color);
+		template<Drawable T>
+		void draw(T& drawable, Program& program, Texture& texture) {
+			bind();
+			program.use();
+			texture.bind();
+			drawable.draw();
+		}
+
+		void clear(float r, float g, float b, float a) {
+			color = { r, g, b, a };
+			glClearNamedFramebufferfv(FBO, GL_COLOR, 0, &color.r);
 			glClearNamedFramebufferfv(FBO, GL_DEPTH, 0, &depth);
 		}
 
@@ -38,9 +48,15 @@ export namespace Sandcore {
 		}
 
 	protected:
-
 		GLuint FBO = 0;
-		GLfloat color[4]{ 0, 0, 0, 0 };
+
+		struct {
+			GLfloat r;
+			GLfloat g;
+			GLfloat b;
+			GLfloat a;
+		} color;
+
 		GLfloat depth = 1.0;
 	};
 }
