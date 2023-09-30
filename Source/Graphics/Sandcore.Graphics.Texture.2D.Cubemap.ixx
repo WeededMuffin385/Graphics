@@ -10,10 +10,6 @@ import Sandcore.Graphics.Image;
 export namespace Sandcore {
 	class Texture2DCubemap : public Texture {
 	public:
-		Texture2DCubemap() {
-
-		}
-
 		void create(int width) {
 			create(width, width);
 		}

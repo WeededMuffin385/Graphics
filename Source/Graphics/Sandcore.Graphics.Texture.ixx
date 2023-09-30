@@ -66,7 +66,7 @@ export namespace Sandcore {
 			glDeleteTextures(1, &texture);
 		}
 
-		GLuint unit = -1;
-		GLuint texture = -1;
+		GLuint unit = 0;
+		GLuint texture = 0;
 	};
 }

@@ -68,7 +68,7 @@ export namespace Sandcore {
 				glVertexArrayAttribBinding(VAO, N, 0);
 			}
 
-			if constexpr (N != (Types - 1)) setAttributeDescriptionHelper<N + 1, P + sizeof(T), Args...>(VAO);
+			if constexpr (N != Types - 1) setAttributeDescriptionHelper<N + 1, P + sizeof(T), Args...>(VAO);
 		}
 	};
 }

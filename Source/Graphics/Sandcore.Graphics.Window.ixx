@@ -54,11 +54,11 @@ export namespace Sandcore {
 			glfwSwapBuffers(window);
 		}
 
-		bool isOpen() {
+		bool isOpen() const {
 			return !glfwWindowShouldClose(window);
 		}
 
-		auto getSize() {
+		auto getSize() const {
 			struct {
 				int width;
 				int height;
@@ -68,7 +68,7 @@ export namespace Sandcore {
 			return size;
 		}
 
-		auto getCursor() {
+		auto getCursor() const {
 			struct {
 				double x;
 				double y;
@@ -95,6 +95,12 @@ export namespace Sandcore {
 		auto setCursor(int mode) {
 			glfwSetInputMode(window, GLFW_CURSOR, mode);
 		}
+
+		enum CursorMode {
+			Normal = GLFW_CURSOR_NORMAL,
+			Hidden = GLFW_CURSOR_HIDDEN,
+			Disabled = GLFW_CURSOR_DISABLED,
+		};
 
 	private:
 		GLFWwindow* window;

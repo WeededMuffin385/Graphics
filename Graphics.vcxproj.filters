@@ -78,5 +78,11 @@
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Texture.2D.Cubemap.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Sandcore.Graphics.Image.Gradient.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Sandcore.System.Timer.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

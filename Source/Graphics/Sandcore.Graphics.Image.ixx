@@ -33,9 +33,9 @@ export namespace Sandcore {
 		}
 
 		Image(const Image& image) = delete;
-		Image(Image&& image) = delete;
-
 		void operator=(const Image& image) = delete;
+
+		Image(Image&& image) = delete;
 		void operator=(Image&& image) = delete;
 
 		Pixel& at(int x, int y) {
