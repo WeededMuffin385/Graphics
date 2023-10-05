@@ -7,7 +7,7 @@ import Sandcore.Graphics.Texture;
 import Sandcore.Graphics.Image;
 
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	class Texture2DCubemap : public Texture {
 	public:
 		void create(int width) {
@@ -28,14 +28,7 @@ export namespace Sandcore {
 		void load(std::filesystem::path path, int index) {
 			Image image;
 			image.load(path);
-			glTextureSubImage3D(
-				texture,
-				0,
-				0, 0, index,
-				width, height, 1,
-				GL_RGBA, GL_UNSIGNED_BYTE,
-				image.getData()
-			);
+			load(image, index);
 		}
 
 		void load(Image& image, int index) {

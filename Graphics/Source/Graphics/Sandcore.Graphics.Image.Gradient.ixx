@@ -2,7 +2,7 @@ export module Sandcore.Graphics.Image.Gradient;
 
 import Sandcore.Graphics.Image;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	Pixel gradient(Pixel a, Pixel b, float c) {
 		float sr = a.r * (1 - c) + b.r * c;
 		float sg = a.g * (1 - c) + b.g * c;

@@ -5,7 +5,7 @@ export module Sandcore.Graphics.Mesh;
 import std;
 import Sandcore.Graphics.Mesh.Vertex;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	template<typename ...Args>
 	class Mesh {
 	public:
@@ -45,7 +45,7 @@ export namespace Sandcore {
 		}
 
 		using Index = std::uint32_t;
-		using Vertex = Sandcore::Vertex<Args...>;
+		using Vertex = Sandcore::Graphics::Vertex<Args...>;
 
 		std::vector<Index> indices;
 		std::vector<Vertex> vertices;

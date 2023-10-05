@@ -6,7 +6,7 @@ import std;
 import Sandcore.Graphics.Texture;
 import Sandcore.Graphics.Image;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	class Texture2D : public Texture {
 	public:
 		void create(int width, int height) {

@@ -7,7 +7,7 @@ import glm;
 import Sandcore.System.Clock;
 import Sandcore.Graphics.Window;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	class Camera {
 	public:
 		Camera() {
@@ -72,9 +72,7 @@ export namespace Sandcore {
 			updateVectors();
 		}
 		void keyboardInput(Window& window) {
-			static Clock clock;
 			clock.restart();
-
 			double velocity = speed * clock.getElapsedTime();
 
 			if (window.getKey(GLFW_KEY_LEFT_SHIFT)) velocity *= 2;
@@ -93,10 +91,10 @@ export namespace Sandcore {
 			front.y = std::cos(glm::gtc::radians(yaw)) * std::cos(glm::gtc::radians(pitch));
 			front.z = std::sin(glm::gtc::radians(pitch));
 
+			// normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 			front = glm::normalize(front);
-			right = glm::normalize(glm::cross(worldUp, front));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+			right = glm::normalize(glm::cross(worldUp, front));  
 			up = glm::normalize(glm::cross(front, right));
-			glm::cross(front, right);
 		}
 
 		glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -104,6 +102,8 @@ export namespace Sandcore {
 		glm::vec3 up       = glm::vec3(0.0f, 0.0f, 1.0f);
 		glm::vec3 right    = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 worldUp  = up;
+
+		Clock clock;
 
 		double yaw = -90.0f;
 		double pitch = 0.0f;

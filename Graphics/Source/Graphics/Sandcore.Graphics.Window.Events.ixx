@@ -4,7 +4,7 @@ export module Sandcore.Graphics.Window.Events;
 
 import std;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	struct Event {
 		enum class Type {
 			Cursor,

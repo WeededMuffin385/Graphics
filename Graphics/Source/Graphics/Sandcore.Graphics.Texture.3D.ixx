@@ -1,13 +1,11 @@
 module;
 #include "Sandcore.Graphics.OpenGL.hpp"
-export module Sandcore.Graphics.Texture.D2.Array;
+export module Sandcore.Graphics.Texture.D3;
 
-import std;
 import Sandcore.Graphics.Texture;
-import Sandcore.Graphics.Image;
 
-export namespace Sandcore {
-	class Texture2DArray : public Texture {
+export namespace Sandcore::Graphics {
+	class Texture3D : public Texture {
 	public:
 		void create(int width, int height, int depth) {
 			this->width = width;
@@ -15,22 +13,8 @@ export namespace Sandcore {
 			this->depth = depth;
 
 
-			allocate<GL_TEXTURE_2D_ARRAY>();
+			allocate<GL_TEXTURE_3D>();
 			glTextureStorage3D(texture, 7, GL_RGBA8, width, height, depth);
-		}
-
-		void load(std::filesystem::path path, int index) {
-			Image image;
-			image.load(path);
-			
-			glTextureSubImage3D(
-				texture,
-				0,
-				0, 0, index,
-				width, height, 1,
-				GL_RGBA, GL_UNSIGNED_BYTE,
-				image.getData()
-			);
 		}
 
 		auto getWidth() const { return width; };

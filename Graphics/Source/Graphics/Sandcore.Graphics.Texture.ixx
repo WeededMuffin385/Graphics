@@ -2,7 +2,7 @@ module;
 #include "Sandcore.Graphics.OpenGL.hpp"
 export module Sandcore.Graphics.Texture;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	class Texture {
 	public:
 		Texture() {

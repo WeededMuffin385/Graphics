@@ -6,7 +6,7 @@ import std;
 import Sandcore.Graphics.Shader;
 import Sandcore.Graphics.Texture;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	template<typename T>
 	concept Drawable = requires(T value) {
 		value.draw();

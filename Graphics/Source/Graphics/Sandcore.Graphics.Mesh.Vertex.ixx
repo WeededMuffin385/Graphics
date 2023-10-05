@@ -3,10 +3,9 @@ module;
 export module Sandcore.Graphics.Mesh.Vertex;
 
 import std;
-
 import Sandcore.Graphics.Debug;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	template<typename ...Args>
 	class Vertex {
 	public:

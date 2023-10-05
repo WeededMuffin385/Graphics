@@ -10,7 +10,7 @@ export module Sandcore.Graphics.Image;
 
 import std;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	struct Pixel {
 		std::uint8_t r;
 		std::uint8_t g;

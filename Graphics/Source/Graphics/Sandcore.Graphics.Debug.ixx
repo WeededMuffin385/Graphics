@@ -4,7 +4,7 @@ export module Sandcore.Graphics.Debug;
 
 import std;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	const bool debug = false;
 
 	const char* get_source_string(GLenum source) {

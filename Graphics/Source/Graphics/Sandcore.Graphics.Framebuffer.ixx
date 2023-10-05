@@ -4,7 +4,7 @@ export module Sandcore.Graphics.Framebuffer;
 
 import Sandcore.Graphics.Canvas;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	class Framebuffer : public Canvas {
 	public:
 		Framebuffer() {

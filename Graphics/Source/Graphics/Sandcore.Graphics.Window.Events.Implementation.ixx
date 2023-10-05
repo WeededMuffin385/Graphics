@@ -5,7 +5,7 @@ export module Sandcore.Graphics.Window.Events : Implementation;
 import std;
 import Sandcore.Graphics.Window.Events;
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	void Events::cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
 		Event event = {
 			.type = Event::Type::Cursor,

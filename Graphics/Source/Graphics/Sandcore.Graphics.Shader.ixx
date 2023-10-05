@@ -6,7 +6,7 @@ import std;
 import glm;
 
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	class Shader {
 	public:
 		enum Type {

@@ -16,10 +16,10 @@ import glm;
 using namespace Sandcore;
 
 int main() {
-	Sandcore::Display window(1920, 1080, "Hello there");
-	debugInit();
+	Graphics::Display window(1920, 1080, "Hello there");
+	Graphics::debugInit();
 
-	Mesh<glm::vec3> mesh;
+	Graphics::Mesh<glm::vec3> mesh;
 	mesh.vertices = {
 		{{-0.5f, -0.5f, 0.0f}},
 		{{ 0.5f, -0.5f, 0.0f}},
@@ -32,11 +32,11 @@ int main() {
 
 	mesh.update();
 
-	Camera camera;
-	Sandcore::Program program;
+	Graphics::Camera camera;
+	Graphics::Program program;
 	program.load("C:/Users/Mi/Documents/GitHub/Graphics/Userdata/triangle");
 
-	Sandcore::Event event;
+	Graphics::Event event;
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
 		}

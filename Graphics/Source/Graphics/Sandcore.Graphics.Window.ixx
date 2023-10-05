@@ -7,7 +7,7 @@ import Sandcore.Graphics.Window.Events;
 import Sandcore.Graphics.Image;
 
 
-export namespace Sandcore {
+export namespace Sandcore::Graphics {
 	bool glfw = glfwInit();
 
 	class Window {
