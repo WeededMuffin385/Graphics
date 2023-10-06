@@ -71,5 +71,6 @@ export namespace Sandcore::Graphics {
 
 	void Events::window_refresh_callback(GLFWwindow* window) {
 		std::println("Refreshed");
+		if (refreshes.contains(window)) refreshes[window]();
 	}
 }

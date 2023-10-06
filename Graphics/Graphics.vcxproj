@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Libraries\glm\glm.ixx" />
+    <ClCompile Include="..\Libraries\glm\glm.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Camera.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Framebuffer.ixx" />
     <ClCompile Include="Source\Graphics\Sandcore.Graphics.Debug.ixx" />

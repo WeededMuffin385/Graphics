@@ -82,7 +82,11 @@ export namespace Sandcore::Graphics {
 			return glfwGetKey(window, key) == state;
 		}
 
-		auto setIcon(Image& image) {
+		void setRefreshCallback(std::function<void()> callback) {
+			Events::setWindowRefreshCallback(window, callback);
+		}
+
+		void setIcon(Image& image) {
 			GLFWimage icon{
 				.width = image.getWidth(),
 				.height = image.getHeight(),
@@ -92,7 +96,7 @@ export namespace Sandcore::Graphics {
 			glfwSetWindowIcon(window, 1, &icon);
 		}
 
-		auto setCursor(int mode) {
+		void setCursor(int mode) {
 			glfwSetInputMode(window, GLFW_CURSOR, mode);
 		}
 

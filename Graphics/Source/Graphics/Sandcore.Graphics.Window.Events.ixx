@@ -66,8 +66,13 @@ export namespace Sandcore::Graphics {
 			glfwSetWindowRefreshCallback(window, window_refresh_callback);
 		}
 
+		static void setWindowRefreshCallback(GLFWwindow* window, std::function<void()> callback) {
+			refreshes.emplace(window, callback);
+		}
+
 		static void erase(GLFWwindow* window) {
 			events.erase(window);
+			refreshes.erase(window);
 		}
 
 	private:
@@ -79,5 +84,6 @@ export namespace Sandcore::Graphics {
 		static void window_refresh_callback(GLFWwindow* window);
 
 		static inline std::unordered_map<GLFWwindow*, std::queue<Event>> events;
+		static inline std::unordered_map<GLFWwindow*, std::function<void()>> refreshes;
 	};
 }

@@ -5,7 +5,6 @@ export module Sandcore.Graphics.Shader;
 import std;
 import glm;
 
-
 export namespace Sandcore::Graphics {
 	class Shader {
 	public:

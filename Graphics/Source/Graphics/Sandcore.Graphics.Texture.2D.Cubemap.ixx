@@ -20,8 +20,6 @@ export namespace Sandcore::Graphics {
 
 			allocate<GL_TEXTURE_CUBE_MAP>();
 			glTextureStorage2D(texture, 1, GL_RGBA8, width, height);
-
-			setParameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		}
 
 
