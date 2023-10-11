@@ -10,7 +10,9 @@ export namespace Sandcore::Graphics {
 	public:
 		enum Type {
 			Vertex = GL_VERTEX_SHADER,
-			Fragment = GL_FRAGMENT_SHADER
+			Fragment = GL_FRAGMENT_SHADER,
+			Geometry = GL_GEOMETRY_SHADER,
+			Compute = GL_COMPUTE_SHADER
 		};
 
 		Shader(Type type) {
@@ -53,6 +55,7 @@ export namespace Sandcore::Graphics {
 						std::println("Compile error: fragment shader. {}!", log);
 						break;
 				}
+				std::println("{}", log);
 				throw std::exception("Bad shader!");
 			}
 		}
@@ -94,24 +97,23 @@ export namespace Sandcore::Graphics {
 		Program& operator=(const Program& other) = delete;
 
 		void load(std::filesystem::path path) {
-			std::filesystem::path vertPath;
-			std::filesystem::path fragPath;
-
 			for (auto& file : std::filesystem::directory_iterator(path)) {
 				auto extension = file.path().extension();
 
-				if (extension == ".vert") vertPath = file.path();
-				if (extension == ".frag") fragPath = file.path();
+				auto loadHelper = [&extension, &path = file.path(), this](Shader::Type type) {
+					Shader shader(type);
+					shader.load(path);
+					glAttachShader(program, shader.get());
+
+					std::println("Loaded [{:^8}] shader!", ShaderTypeToString(type));
+				};
+
+				if (extension == ".vert") loadHelper(Shader::Type::Vertex);
+				if (extension == ".frag") loadHelper(Shader::Type::Fragment);
+				if (extension == ".geom") loadHelper(Shader::Type::Geometry);
+				if (extension == ".comp") loadHelper(Shader::Type::Compute);
 			}
 
-			Shader vertShader(Shader::Type::Vertex);
-			Shader fragShader(Shader::Type::Fragment);
-
-			vertShader.load(vertPath);
-			fragShader.load(fragPath);
-
-			glAttachShader(program, vertShader.get());
-			glAttachShader(program, fragShader.get());
 			glLinkProgram(program);
 			status();
 		}
@@ -140,10 +142,29 @@ export namespace Sandcore::Graphics {
 
 	private:
 		template<typename T> struct SetHelper {};
-		template<> struct SetHelper<int> { static inline auto& value = glUniform1i; };
-		template<> struct SetHelper<float> { static inline auto& value = glUniform1f; };
-		template<> struct SetHelper<glm::vec3> { static inline auto& value = glUniform3fv; };
-		template<> struct SetHelper<glm::mat4> { static inline auto& value = glUniformMatrix4fv; };
+		template<> struct SetHelper<int>		{ static inline auto& value = glUniform1i; };
+		template<> struct SetHelper<float>		{ static inline auto& value = glUniform1f; };
+		template<> struct SetHelper<glm::vec3>	{ static inline auto& value = glUniform3fv; };
+		template<> struct SetHelper<glm::mat4>	{ static inline auto& value = glUniformMatrix4fv; };
+
+		template<Shader::Type T> struct ExtensionHelper {};
+		template<> struct ExtensionHelper<Shader::Type::Vertex>		{ static constexpr auto value = ".vert"; };
+		template<> struct ExtensionHelper<Shader::Type::Fragment>	{ static constexpr auto value = ".frag"; };
+		template<> struct ExtensionHelper<Shader::Type::Geometry>	{ static constexpr auto value = ".geom"; };
+		template<> struct ExtensionHelper<Shader::Type::Compute>	{ static constexpr auto value = ".comp"; };
+
+		std::string ShaderTypeToString(Shader::Type type) {
+			switch (type) {
+				case Shader::Type::Vertex:
+					return "Vertex";
+				case Shader::Type::Fragment:
+					return "Fragment";
+				case Shader::Type::Geometry:
+					return "Geometry";
+				case Shader::Type::Compute:
+					return "Compute";
+			}
+		}
 
 		void status() {
 			GLint success;

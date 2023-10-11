@@ -70,7 +70,8 @@ export namespace Sandcore::Graphics {
 	}
 
 	void Events::window_refresh_callback(GLFWwindow* window) {
-		std::println("Refreshed");
+		static int i = 0;
+		std::println("Window refresh callback called {}", i++);
 		if (refreshes.contains(window)) refreshes[window]();
 	}
 }
