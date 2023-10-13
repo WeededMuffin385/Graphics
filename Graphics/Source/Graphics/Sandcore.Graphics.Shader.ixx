@@ -98,20 +98,10 @@ export namespace Sandcore::Graphics {
 
 		void load(std::filesystem::path path) {
 			for (auto& file : std::filesystem::directory_iterator(path)) {
-				auto extension = file.path().extension();
-
-				auto loadHelper = [&extension, &path = file.path(), this](Shader::Type type) {
-					Shader shader(type);
-					shader.load(path);
-					glAttachShader(program, shader.get());
-
-					std::println("Loaded [{:^8}] shader!", ShaderTypeToString(type));
-				};
-
-				if (extension == ".vert") loadHelper(Shader::Type::Vertex);
-				if (extension == ".frag") loadHelper(Shader::Type::Fragment);
-				if (extension == ".geom") loadHelper(Shader::Type::Geometry);
-				if (extension == ".comp") loadHelper(Shader::Type::Compute);
+				loadHelper<Shader::Type::Vertex>(file.path());
+				loadHelper<Shader::Type::Fragment>(file.path());
+				loadHelper<Shader::Type::Geometry>(file.path());
+				loadHelper<Shader::Type::Compute>(file.path());
 			}
 
 			glLinkProgram(program);
@@ -163,6 +153,17 @@ export namespace Sandcore::Graphics {
 					return "Geometry";
 				case Shader::Type::Compute:
 					return "Compute";
+			}
+		}
+
+		template<Shader::Type T>
+		void loadHelper(const std::filesystem::path& path) {
+			if (path.extension() == ExtensionHelper<T>::value) {
+				Shader shader(T);
+				shader.load(path);
+				glAttachShader(program, shader.get());
+
+				std::println("Loaded [{}] shader!", ExtensionHelper<T>::value);
 			}
 		}
 

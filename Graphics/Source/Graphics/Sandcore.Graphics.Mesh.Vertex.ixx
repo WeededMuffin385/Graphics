@@ -26,7 +26,7 @@ export namespace Sandcore::Graphics {
 		static constexpr std::size_t Types = (sizeof...(Args));
 		static constexpr std::size_t Bytes = (sizeof(Args) + ...);
 
-		std::uint8_t data[Bytes];
+		std::byte data[Bytes];
 
 		template<std::size_t N, std::size_t P, typename T, typename ...Args>
 		struct GetHelper {
