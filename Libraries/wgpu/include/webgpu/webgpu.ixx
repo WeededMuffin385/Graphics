@@ -32,21 +32,19 @@
  *   (see https://github.com/eliemichel/webgpu-cpp )
  */
 
-#pragma once
-
+module;
+#define WEBGPU_CPP_IMPLEMENTATION
 #include <webgpu/webgpu.h>
 #include <webgpu/wgpu.h>
-
-#include <iostream>
-#include <vector>
-#include <functional>
 #include <cassert>
-#include <memory>
+export module webgpu;
+
+import std;
 
 /**
  * A namespace providing a more C++ idiomatic API to WebGPU.
  */
-namespace wgpu {
+export namespace wgpu {
 
 struct DefaultFlag {};
 constexpr DefaultFlag Default;
